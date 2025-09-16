@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harshada Deshingkar - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark {
+            background-color: #0f172a; /* Slate 900 */
+            color: #f1f5f9; /* Slate 100 */
+        }
+        .dark .bg-white { background-color: #1e293b; /* Slate 800 */ }
+        .dark .bg-gray-50 { background-color: #0f172a; }
+        .dark .text-gray-800 { color: #f1f5f9; /* Slate 100 */ }
+        .dark .text-gray-600 { color: #cbd5e1; /* Slate 300 */ }
+        .dark .text-gray-500 { color: #94a3b8; /* Slate 400 */ }
+        .dark .border-gray-200 { border-color: #334155; /* Slate 700 */ }
+        .dark .hover\:bg-gray-100:hover { background-color: #334155; /* Slate 700 */ }
+        .dark .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25); }
+        .dark .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+        .dark a:hover, .dark button:hover {
+            color: #60a5fa; /* blue-400 */
+        }
+        .section-title {
+            @apply text-3xl font-bold text-center mb-2;
+            background: -webkit-linear-gradient(45deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-subtitle { @apply text-center text-gray-500 mb-12; }
+        .nav-link { @apply text-gray-600 hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium transition-colors; }
+        .dark .nav-link { @apply text-gray-300 hover:text-blue-400; }
+        .mobile-nav-link { @apply block text-gray-600 hover:text-blue-500 px-3 py-2 rounded-md text-base font-medium transition-colors; }
+        .dark .mobile-nav-link { @apply text-gray-300 hover:text-blue-400; }
+        
+        /* Typing cursor effect */
+        .type-cursor {
+            border-right: .15em solid #3b82f6;
+            animation: blink-caret .75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #3b82f6; }
+        }
+
+        /* Project card hover effect */
+        .project-card {
+            @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .dark .project-card:hover {
+             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-blue-600 dark:text-blue-500">Harshada Deshingkar</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#academics" class="nav-link">Academics</a>
+                        <a href="#skills" class="nav-link">Skills</a>
+                        <a href="#experience" class="nav-link">Experience</a>
+                        <a href="#leadership" class="nav-link">Leadership</a>
+                        <a href="#patents-publications" class="nav-link">Patents & Publications</a>
+                        <a href="#major-projects" class="nav-link">Projects</a>
+                        <a href="#certifications" class="nav-link">Certifications</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                   <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
+                        <i data-lucide="sun" class="block dark:hidden"></i>
+                        <i data-lucide="moon" class="hidden dark:block"></i>
+                    </button>
+                    <div class="-mr-2 flex md:hidden ml-2">
+                        <button id="mobile-menu-button" type="button" class="bg-white dark:bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-blue-500 hover:bg-gray-100 focus:outline-none">
+                            <span class="sr-only">Open main menu</span>
+                            <i data-lucide="menu" class="block h-6 w-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="mobile-nav-link">About</a>
+                <a href="#academics" class="mobile-nav-link">Academics</a>
+                <a href="#skills" class="mobile-nav-link">Skills</a>
+                <a href="#experience" class="mobile-nav-link">Experience</a>
+                <a href="#leadership" class="mobile-nav-link">Leadership</a>
+                <a href="#patents-publications" class="mobile-nav-link">Patents & Publications</a>
+                <a href="#major-projects" class="mobile-nav-link">Projects</a>
+                <a href="#certifications" class="mobile-nav-link">Certifications</a>
+                <a href="#contact" class="mobile-nav-link">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+        
+        <!-- Hero Section -->
+        <section id="home" class="flex flex-col-reverse md:flex-row items-center justify-between py-20 md:py-32">
+            <div class="md:w-1/2 text-center md:text-left mt-10 md:mt-0 reveal">
+                <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-800 leading-tight">
+                    Hi, I'm <span class="text-blue-600 dark:text-blue-500" id="typing-effect"></span><span class="type-cursor"></span>
+                </h1>
+                <p class="mt-4 text-lg text-gray-600">
+                    A final-year student doing B.Tech in Artificial Intelligence and Data Science passionate about building intelligent systems that turn complex data into actionable insights.
+                </p>
+                <div class="mt-8 flex justify-center md:justify-start space-x-4">
+                    <a href="#contact" class="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105 hover:shadow-blue-500/50">Contact Me</a>
+                    <a href="[LINK_TO_YOUR_RESUME.PDF]" target="_blank" class="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-lg border border-blue-600 shadow-md hover:bg-gray-100 transition-transform transform hover:scale-105 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-gray-700">View Resume</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center reveal">
+                <img src="hd_photo_face.jpeg" alt="Harshada Deshingkar" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-2xl border-4 border-white dark:border-gray-800">
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 reveal">
+             <h2 class="section-title">About Me</h2>
+             <p class="section-subtitle">My journey, my passions, and my values.</p>
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3 flex justify-center">
+                     <img src="https://placehold.co/300x400/E2E8F0/4A5568?text=Add+Photo" alt="About Me" class="rounded-lg shadow-lg w-full max-w-xs">
+                </div>
+                <div class="md:w-2/3">
+                    <p class="text-gray-600 mb-4">
+                        [Write a paragraph about your background and what sparked your interest in Data Science and AI. Mention your current academic status and what drives you.]
+                    </p>
+                    <p class="text-gray-600 mb-6">
+                        [Write a second paragraph about your problem-solving approach, what you enjoy working on, and perhaps a brief mention of your interests outside of technology to add a personal touch.]
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                            <h3 class="font-bold text-lg mb-1 text-blue-600 dark:text-blue-500">Curious Thinker</h3>
+                            <p class="text-gray-500 text-sm">Always asking "why" and exploring innovative solutions.</p>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                             <h3 class="font-bold text-lg mb-1 text-blue-600 dark:text-blue-500">Collaborative Spirit</h3>
+                            <p class="text-gray-500 text-sm">Great results come from great teamwork and communication.</p>
+                        </div>
+                         <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                             <h3 class="font-bold text-lg mb-1 text-blue-600 dark:text-blue-500">Impact-Oriented</h3>
+                            <p class="text-gray-500 text-sm">Focused on creating solutions that provide real-world value.</p>
+                        </div>
+                         <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                             <h3 class="font-bold text-lg mb-1 text-blue-600 dark:text-blue-500">Lifelong Learner</h3>
+                            <p class="text-gray-500 text-sm">Continuously updating my skills in a fast-evolving field.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Academics Section -->
+        <section id="academics" class="py-24 reveal">
+            <h2 class="section-title">Education</h2>
+            <p class="section-subtitle">My educational background and qualifications.</p>
+            <br>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-bold text-gray-800">B.Tech in Artificial Intelligence and Data Science</h3>
+                    <p class="text-md text-gray-600 font-medium mb-2">Vishwakarma Institute of Technology, Pune</p>
+                    <p class="text-sm text-gray-500 mb-4">2022 - Expected May 2026 | CGPA: 9.04</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-bold text-gray-800">Higher Secondary Certificate Examination (PCM, Computer Science)</h3>
+                    <p class="text-md text-gray-600 font-medium mb-2">Rajiv Gandhi Academy of E-Learning school & Science Junior college</p>
+                    <p class="text-sm text-gray-500 mb-4">2021 - 2022 | Percentage: 84.83%</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-bold text-gray-800">Secondary High School Examination</h3>
+                    <p class="text-md text-gray-600 font-medium mb-2">City International School (CBSE)</p>
+                    <p class="text-sm text-gray-500 mb-4">2020 | Percentage: 93.60%</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 reveal">
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">An interactive globe of my expertise. (Drag to rotate!)</p>
+            <div class="flex justify-center items-center h-96">
+                <div class="tagcloud-container w-full max-w-lg"></div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-24 reveal">
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-subtitle">Where I'm starting to build my professional work.</p>
+            <div class="relative border-l-2 border-blue-500 pl-8 space-y-12">
+                <!-- Timeline Item 1 -->
+                <div class="relative reveal">
+                    <div class="absolute -left-[42px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white dark:border-gray-900"></div>
+                    <p class="text-sm text-gray-500 mb-1">July 2025 - Present</p>
+                    <h3 class="text-xl font-bold text-gray-800">Data Science Intern</h3>
+                    <p class="text-md text-gray-600 font-medium">Wolters Kluwer</p>
+                    <p class="mt-2 text-gray-600">[Briefly describe your role and key achievements. Use bullet points for clarity.]</p>
+                </div>
+                <!-- Timeline Item 2 -->
+                <!-- <div class="relative reveal">
+                     <div class="absolute -left-[42px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white dark:border-gray-900"></div>
+                     <p class="text-sm text-gray-500 mb-1">[Start Date] - [End Date]</p>
+                    <h3 class="text-xl font-bold text-gray-800">[Your Job Title]</h3>
+                    <p class="text-md text-gray-600 font-medium">[Company Name]</p>
+                    <p class="mt-2 text-gray-600">[Briefly describe your role and key achievements. Use bullet points for clarity.]</p>
+                </div> -->
+            </div>
+        </section>
+        
+        <!-- Leadership Section -->
+        <section id="leadership" class="py-24 reveal">
+            <h2 class="section-title">Leadership & Responsibilities</h2>
+            <p class="section-subtitle">Roles where I have contributed and grown.</p>
+            <div class="relative border-l-2 border-blue-500 pl-8 space-y-12">
+                <div class="relative reveal">
+                    <div class="absolute -left-[42px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white dark:border-gray-900"></div>
+                    <p class="text-sm text-gray-500 mb-1">2023 - Present</p>
+                    <h3 class="text-xl font-bold text-gray-800">Technical Secretary</h3>
+                    <p class="text-md text-gray-600 font-medium">Akhil Bhartiya Vidyarthi Parishad (ABVP), VIT Pune</p>
+                    <ul class="mt-2 text-gray-600 list-disc list-inside space-y-1">
+                        <li>Addressed and resolved technical issues faced by students, developed solutions to alleviate study and exam stress.</li>
+                        <li>Worked on initiatives for student welfare and support & coordinated with faculty and administration.</li>
+                        <li>Organized and conducted seminars to help students with academic challenges.</li>
+                    </ul>
+                </div>
+                <div class="relative reveal">
+                    <div class="absolute -left-[42px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white dark:border-gray-900"></div>
+                    <p class="text-sm text-gray-500 mb-1">2023 - 2024</p>
+                    <h3 class="text-xl font-bold text-gray-800">Finance Head</h3>
+                    <p class="text-md text-gray-600 font-medium">Abhivriddhi- Student Training and Development Committee</p>
+                     <ul class="mt-2 text-gray-600 list-disc list-inside space-y-1">
+                        <li>Managed finances for events, procured sanctioned budgets and ensured proper allocation.</li>
+                        <li>Oversaw all billing and reimbursement processes and coordinated with stakeholders.</li>
+                    </ul>
+                </div>
+                 <div class="relative reveal">
+                    <div class="absolute -left-[42px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white dark:border-gray-900"></div>
+                    <p class="text-sm text-gray-500 mb-1">2023 - 2024</p>
+                    <h3 class="text-xl font-bold text-gray-800">Executive Committee Member</h3>
+                    <p class="text-md text-gray-600 font-medium">IEEE Student Branch, VIT Pune</p>
+                     <ul class="mt-2 text-gray-600 list-disc list-inside space-y-1">
+                        <li>Oversaw the planning and execution of technical events, including hackathons and workshops.</li>
+                        <li>Coordinated with college administration to secure venues and resources for events.</li>
+                    </ul>
+                </div>
+                 <div class="relative reveal">
+                    <div class="absolute -left-[42px] top-1.5 w-5 h-5 bg-blue-500 rounded-full border-4 border-white dark:border-gray-900"></div>
+                    <p class="text-sm text-gray-500 mb-1">2022 - 2023</p>
+                    <h3 class="text-xl font-bold text-gray-800">Public Relations Volunteer</h3>
+                    <p class="text-md text-gray-600 font-medium">Akhil Bhartiya Vidyarthi Parishad (ABVP), VIT Pune</p>
+                     <ul class="mt-2 text-gray-600 list-disc list-inside space-y-1">
+                        <li>Communicated with ABVP units across Maharashtra to organize and promote events and initiatives.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Patents and Publications Section -->
+        <section id="patents-publications" class="py-24 reveal">
+            <h2 class="section-title">Patents & Publications</h2>
+            <p class="section-subtitle">My contributions to research and innovation.</p>
+            <div class="max-w-4xl mx-auto space-y-8">
+                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm text-gray-500 mb-1">Publication | ICCUBEA-2023</p>
+                    <h3 class="text-lg font-bold">"Data Deduplication using Python"</h3>
+                    <p class="text-gray-600 mt-2 text-sm">Paper published in 7th International Conference on Computing, Communication, Control and Automation.</p>
+                    <a href="[LINK_TO_IEEE_PAPER]" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:underline mt-3">
+                        Read on IEEE Xplore <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                    </a>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm text-gray-500 mb-1">Indian Patent | Published</p>
+                    <h3 class="text-lg font-bold">"Smart Rakshak: Weapon Detecting Surveillance Robot"</h3>
+                    <p class="text-gray-600 mt-2 text-sm">A robot with ESP32 CAM for video surveillance, GPS tracking, and real-time weapon detection using a CNN algorithm with 95% accuracy.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                     <p class="text-sm text-gray-500 mb-1">Indian Patent | Published</p>
+                    <h3 class="text-lg font-bold">"Enhanced Energy Metering and Management through Integrated IoT Systems"</h3>
+                    <p class="text-gray-600 mt-2 text-sm">A system for users to monitor real-time energy consumption and for providers to remotely manage electric supply.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Major Projects Section -->
+        <section id="major-projects" class="py-24 reveal">
+            <h2 class="section-title">Major Projects</h2>
+            <p class="section-subtitle">A selection of large-scale projects I'm proud of.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card reveal">
+                    <img src="https://placehold.co/600x400/3B82F6/FFFFFF?text=FREEDUP" alt="FREEDUP Project" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">FREEDUP: FREE your DUPlicates</h3>
+                        <p class="text-gray-600 mb-4 text-sm">A web portal to detect and delete duplicate files and optimize storage using hashing methodology.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Flask</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Python</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">HTML/CSS</span>
+                        </div>
+                        <a href="[LINK_TO_GITHUB_REPO]" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:underline">View Code <i data-lucide="github" class="w-4 h-4 ml-2"></i></a>
+                    </div>
+                </div>
+                 <!-- Project 2 -->
+                <div class="project-card reveal">
+                    <img src="https://placehold.co/600x400/10B981/FFFFFF?text=Landmine+Robot" alt="Landmine Robot Project" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Landmine Detecting Surveillance Robot</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Designed for armed forces to detect landmines, send accurate locations, and monitor surroundings for human activities.</p>
+                         <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-purple-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">Embedded C</span>
+                            <span class="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">Sensors</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Robotics</span>
+                        </div>
+                        <a href="[LINK_TO_GITHUB_REPO]" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:underline">View Code <i data-lucide="github" class="w-4 h-4 ml-2"></i></a>
+                    </div>
+                </div>
+                 <!-- Project 3 -->
+                <div class="project-card reveal">
+                    <img src="https://placehold.co/600x400/F59E0B/FFFFFF?text=Fitness+Fusion" alt="Fitness Fusion Project" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Fitness Fusion: Gym Website</h3>
+                        <p class="text-gray-600 mb-4 text-sm">A dynamic and reactive gym website providing details on memberships, purchases, and offers, with an easy-to-use admin panel.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">PHP</span>
+                             <span class="bg-pink-100 text-pink-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-pink-200 dark:text-pink-900">MySQL</span>
+                             <span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">JavaScript</span>
+                        </div>
+                        <a href="[LINK_TO_DEMO_OR_REPO]" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:underline">View Demo <i data-lucide="external-link" class="w-4 h-4 ml-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Minor Projects Section -->
+        <section id="minor-projects" class="py-24 reveal">
+            <h2 class="section-title">Minor Projects</h2>
+            <p class="section-subtitle">Other noteworthy projects and explorations.</p>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-lg font-bold mb-1">Book Recommendation System</h3>
+                    <p class="text-gray-600 text-sm mb-3">Suggests books based on user preferences using collaborative filtering. (Tech: R)</p>
+                    <a href="[LINK_TO_GITHUB_REPO]" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:underline text-sm">View Code <i data-lucide="github" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-lg font-bold mb-1">Property Management System</h3>
+                    <p class="text-gray-600 text-sm mb-3">A comprehensive system for users to buy, sell, or rent properties. (Tech: Java, MySQL)</p>
+                    <a href="[LINK_TO_GITHUB_REPO]" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:underline text-sm">View Code <i data-lucide="github" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-lg font-bold mb-1">Personalized Billing Management System</h3>
+                    <p class="text-gray-600 text-sm mb-3">A generalized system for shop owners to manage bills and purchases. (Tech: Java, Swing, AWT)</p>
+                    <a href="[LINK_TO_GITHUB_REPO]" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:underline text-sm">View Code <i data-lucide="github" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-lg font-bold mb-1">Gripper Rover</h3>
+                    <p class="text-gray-600 text-sm mb-3">A robot car capable of lifting weights up to 2.5 kgs. (Tech: ESP32, Embedded C)</p>
+                    <a href="[LINK_TO_GITHUB_REPO]" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:underline text-sm">View Code <i data-lucide="github" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-lg font-bold mb-1">Ultrasonic Radar System</h3>
+                    <p class="text-gray-600 text-sm mb-3">A prototype radar system using Arduino to detect objects in the periphery. (Tech: Embedded C)</p>
+                    <a href="[LINK_TO_GITHUB_REPO]" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:underline text-sm">View Code <i data-lucide="github" class="w-4 h-4 ml-1"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-24 reveal">
+            <h2 class="section-title">Certifications</h2>
+            <p class="section-subtitle">A showcase of my validated skills and continued learning.</p>
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="[LINK_TO_CERTIFICATE]" target="_blank" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm font-bold text-blue-600 dark:text-blue-500">Nvidia</p>
+                    <h3 class="font-semibold">Fundamentals of Deep Learning</h3>
+                </a>
+                <a href="[LINK_TO_CERTIFICATE]" target="_blank" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm font-bold text-blue-600 dark:text-blue-500">LinkedIn</p>
+                    <h3 class="font-semibold">Power BI Essential Training</h3>
+                </a>
+                <a href="[LINK_TO_CERTIFICATE]" target="_blank" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm font-bold text-blue-600 dark:text-blue-500">LinkedIn</p>
+                    <h3 class="font-semibold">Deep Learning: Face Recognition</h3>
+                </a>
+                <a href="[LINK_TO_CERTIFICATE]" target="_blank" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm font-bold text-blue-600 dark:text-blue-500">LinkedIn</p>
+                    <h3 class="font-semibold">Advanced Design Patterns: Design Principles</h3>
+                </a>
+                <a href="[LINK_TO_CERTIFICATE]" target="_blank" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm font-bold text-blue-600 dark:text-blue-500">LinkedIn</p>
+                    <h3 class="font-semibold">Design Thinking: Data Intelligence</h3>
+                </a>
+                 <a href="[LINK_TO_CERTIFICATE]" target="_blank" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm font-bold text-blue-600 dark:text-blue-500">Google</p>
+                    <h3 class="font-semibold">Project Initiation: Starting a Successful Project</h3>
+                </a>
+                 <a href="[LINK_TO_CERTIFICATE]" target="_blank" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm font-bold text-blue-600 dark:text-blue-500">Simplilearn</p>
+                    <h3 class="font-semibold">Introduction to Python OpenCV</h3>
+                </a>
+                 <a href="[LINK_TO_CERTIFICATE]" target="_blank" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm font-bold text-blue-600 dark:text-blue-500">Simplilearn</p>
+                    <h3 class="font-semibold">Data Science Using Python</h3>
+                </a>
+                <a href="[LINK_TO_CERTIFICATE]" target="_blank" class="block bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm font-bold text-blue-600 dark:text-blue-500">Google</p>
+                    <h3 class="font-semibold">Foundations of Project Management</h3>
+                </a>
+            </div>
+        </section>
+
+        <!-- Exams & Extra-Curriculars Section -->
+        <section id="achievements" class="py-24 reveal">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="section-title !text-left !text-2xl">Exams Qualified</h2>
+                    <ul class="mt-8 space-y-3 text-gray-600 list-disc list-inside">
+                        <li>JEE Mains 2022: 91.13 percentile</li>
+                        <li>JEE paper-II (B. Arch) 2022: AIR 4487</li>
+                        <li>MHT CET 2022: 95.98 percentile</li>
+                        <li>CUET 2022: High percentiles in English, Physics & more</li>
+                        <li>NCO (International Ranks): 199 (2018), 293 (2019)</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h2 class="section-title !text-left !text-2xl">Extra-Curricular Activities</h2>
+                     <div class="mt-8">
+                        <h3 class="font-bold text-lg text-gray-700 dark:text-gray-200">Music</h3>
+                        <ul class="mt-2 space-y-2 text-gray-600 list-disc list-inside">
+                             <li>Completed 3rd Year in Indian Classical Music (Vocal).</li>
+                             <li>Completed 1st Year (Distinction) in Harmonium.</li>
+                        </ul>
+                     </div>
+                      <div class="mt-6">
+                        <h3 class="font-bold text-lg text-gray-700 dark:text-gray-200">Sports</h3>
+                        <ul class="mt-2 space-y-2 text-gray-600 list-disc list-inside">
+                             <li>Gold Medal, Inter Do-jo Karate Kata Championship.</li>
+                             <li>Bronze Medal, 24th National Karate Championship.</li>
+                             <li>5th Kyu (Maroon Belt) in Shotokan Karate.</li>
+                        </ul>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 reveal">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">I'm always open to discussing new projects, creative ideas, or opportunities.</p>
+            <br>
+            <div class="max-w-xl mx-auto text-center">
+                 <p class="text-lg text-gray-600 mb-8">
+                    Have a question or want to work together? Feel free to reach out via email or connect with me on social media.
+                </p>
+                <a href="mailto:[YOUR_EMAIL_ADDRESS]" class="inline-block bg-blue-600 text-white font-bold text-xl px-8 py-4 rounded-lg shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105 hover:shadow-blue-500/50">
+                    harshadadeshingkar@yahoo.in
+                </a>
+                <div class="mt-12 flex justify-center space-x-6">
+                    <a href="[YOUR_GITHUB_LINK]" target="_blank" class="text-gray-500 hover:text-blue-500 transition-colors">
+                        <i data-lucide="github" class="w-8 h-8"></i>
+                    </a>
+                     <a href="[YOUR_LINKEDIN_LINK]" target="_blank" class="text-gray-500 hover:text-blue-500 transition-colors">
+                        <i data-lucide="linkedin" class="w-8 h-8"></i>
+                    </a>
+                     <a href="[YOUR_TWITTER_LINK]" target="_blank" class="text-gray-500 hover:text-blue-500 transition-colors">
+                        <i data-lucide="twitter" class="w-8 h-8"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 reveal">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+            <p>&copy; 2025 Harshada Deshingkar. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        const isDarkMode = () => {
+             if (localStorage.getItem('theme') === 'dark') return true;
+             if (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
+             return false;
+        }
+
+        if (isDarkMode()) {
+          htmlEl.classList.add('dark');
+        } else {
+          htmlEl.classList.remove('dark')
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            htmlEl.classList.toggle('dark');
+            localStorage.setItem('theme', htmlEl.classList.contains('dark') ? 'dark' : 'light');
+            // Re-initialize tag cloud with new colors
+            initializeTagCloud();
+        });
+
+        // Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                 mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Typing Effect
+        const typingElement = document.getElementById('typing-effect');
+        const words = ["Harshada Deshingkar", "a Student", "a Learner", " an AI Enthusiast"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typingElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+            }
+            
+            const typingSpeed = isDeleting ? 100 : 200;
+            setTimeout(type, typingSpeed);
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 3D Tag Cloud
+        let tagCloudInstance = null;
+        function initializeTagCloud() {
+            const container = '.tagcloud-container';
+            // Clear previous instance if it exists
+            const existingCanvas = document.querySelector(`${container} canvas`);
+            if (existingCanvas) {
+                existingCanvas.remove();
+            }
+
+            const texts = [
+                'Python', 'SQL', 'R', 'Java', 'PHP', 'Embedded C', 
+                'Pandas', 'NumPy', 'Flask',
+                'Scikit-learn', 'TensorFlow', 'Keras', 'PyTorch',
+                'NLP', 'Computer Vision', 'MySQL', 'Git',
+                'Power BI', 'Data Analysis', 'Web Dev'
+            ];
+            
+            const options = {
+                radius: Math.min(500, window.innerWidth, 500) / 2 - 50,
+                maxSpeed: 'fast',
+                initSpeed: 'fast',
+                direction: 135,
+                keep: true,
+                // Use different colors for light and dark mode
+                itemClass: isDarkMode() ? 'text-blue-400 font-semibold' : 'text-blue-600 font-semibold',
+                useContainerInlineStyles: false
+            };
+            
+            tagCloudInstance = TagCloud(container, texts, options);
+        }
+
+        // Initialize on load and resize
+        document.addEventListener('DOMContentLoaded', initializeTagCloud);
+        window.addEventListener('resize', initializeTagCloud);
+
+    </script>
+</body>
+</html>
+
